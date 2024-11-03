@@ -1,11 +1,9 @@
 <?php
 include 'config.php';
 
-// Mendapatkan parameter dari URL
 $judul_buku = urldecode($_GET['judul_buku']);
 $penulis = urldecode($_GET['penulis']);
 
-// Query untuk mendapatkan data buku berdasarkan judul dan penulis
 $query = "SELECT * FROM info_buku WHERE Judul_Buku=? AND Penulis=?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("ss", $judul_buku, $penulis);
@@ -13,7 +11,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
-include 'header.php';  // Pastikan file ini ada di lokasi yang benar
+include 'header.php';
 ?>
 <h2>Edit Buku</h2>
 <form action="update.php" method="post" class="mt-3">
@@ -37,4 +35,4 @@ include 'header.php';  // Pastikan file ini ada di lokasi yang benar
     </div>
     <button type="submit" class="btn btn-primary">Update Buku</button>
 </form>
-<?php include 'footer.php'; ?>  <!-- Pastikan file ini ada di lokasi yang benar -->
+<?php include 'footer.php'; ?>
